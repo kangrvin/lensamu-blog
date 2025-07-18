@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('front.home.index', [
+        return view('back.home.index', [
             'latest_post' => Article::latest()->first(),
             'articles' => Article::latest()->get(),
             'categories' => Category::latest()->get(),

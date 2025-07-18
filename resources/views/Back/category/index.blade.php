@@ -44,24 +44,28 @@
                 </thead>
 
                 <tbody>
-                    @foreach ($categories as $item)
+                    @foreach ($categories as $item => $key)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->slug }}</td>
-                            <td>{{ $item->created_at }}</td>
+                            <td>{{ $categories->firstItem() + $item }}</td>
+                            <td>{{ $key->name }}</td>
+                            <td>{{ $key->slug }}</td>
+                            <td>{{ $key->created_at }}</td>
                             <td>
                                 <div class="text-center">
                                     <button class="btn btn-secondary" data-bs-toggle="modal"
-                                        data-bs-target="#modalUpdate{{ $item->id }}">Edit</button>
+                                        data-bs-target="#modalUpdate{{ $key->id }}">Edit</button>
                                     <button class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#modalDelete{{ $item->id }}">Delete</button>
+                                        data-bs-target="#modalDelete{{ $key->id }}">Delete</button>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+
+            <div>
+                {{ $categories->links() }}
+            </div>
         </div>
 
         <!-- Modal Create -->
