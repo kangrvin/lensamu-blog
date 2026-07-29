@@ -1,16 +1,16 @@
 @extends('front.layout.template')
 
 @push('meta-seo')
-<meta name="description" value="Blog lensamu, seputar opini kader IMM FEB">
-<meta name="keyword" value="lensa, lensamu, lensamu.id">
-<meta property="og:title" content="Blog - RvinDev">
-<meta property="og:url" value="{{ url()->current() }}">
-<meta property="og:site_name" content="Blog RvinDev">
-<meta property="og:description" value="Blog lensamu, seputar opini kader IMM FTD">
-<meta property="og:image" value="{{ asset('storage/back/' . $latest_post->img) }}">
+    <meta name="description" value="Blog lensamu, seputar opini kader IMM FEB">
+    <meta name="keyword" value="lensa, lensamu, lensamu.id">
+    <meta property="og:title" content="Blog - RvinDev">
+    <meta property="og:url" value="{{ url()->current() }}">
+    <meta property="og:site_name" content="Blog RvinDev">
+    <meta property="og:description" value="Blog lensamu, seputar opini kader IMM FTD">
+    <meta property="og:image" value="{{ asset('storage/back/' . $latest_post->img) }}">
 @endpush
 
-@section('title', 'Blog - Ervin Dev')
+@section('title', 'lensamu.id')
 
 @section('content')
     <!-- Page content-->
@@ -28,7 +28,9 @@
                                 href="{{ url('category/' . $latest_post->Category->slug) }}">{{ $latest_post->Category->name }}</a>
                         </div>
                         <h2 class="card-title">{{ $latest_post->title }}</h2>
-                        <p class="card-text">{{ Str::limit(strip_tags($latest_post->desc), 200, '...') }}</p>
+                        <p class="card-text">
+                            {{ Str::limit(html_entity_decode(strip_tags($latest_post->desc)), 200, '...') }}
+                        </p>
                         <a class="btn btn-primary" href="{{ url('p/' . $latest_post->slug) }}">Read more →</a>
                     </div>
                 </div>
@@ -47,7 +49,9 @@
                                             href="{{ url('category/' . $item->Category->slug) }}">{{ $item->Category->name }}</a>
                                     </div>
                                     <h2 class="card-title h4">{{ $item->title }}</h2>
-                                    <p class="card-text">{{ Str::limit(strip_tags($item->desc), 200, '...') }}</p>
+                                    <p class="card-text">
+                                        {{ Str::limit(html_entity_decode(strip_tags($item->desc)), 100, '...') }}
+                                    </p>
                                     <a class="btn btn-primary" href="{{ url('p/' . $item->slug) }}">Read more →</a>
                                 </div>
                             </div>

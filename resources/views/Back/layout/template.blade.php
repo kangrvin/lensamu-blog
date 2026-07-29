@@ -136,22 +136,31 @@
         </symbol>
 
     </svg>
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">
-            <small>welcome {{ auth()->user()->email }}</small>
-        </a>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow d-flex align-items-center">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 d-flex align-items-center gap-2" href="#">
+            <span class="fw-bold">welcome {{ auth()->user()->email }}</span>
 
-        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            @php
+                $userInitial = strtoupper(substr(auth()->user()->email, 0, 1));
+            @endphp
 
-        <div class="navbar-nav">
-            <div class="nav-item text-nowrap">
-                <a class="nav-link px-3" href="#">Sign out</a>
+            <!-- AVATAR HURUF -->
+            <div
+                style="
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #dc3545; /* merah biasa seperti tombol delete */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        ">
+                {{ $userInitial }}
             </div>
-        </div>
+        </a>
     </header>
 
     <div class="container-fluid">

@@ -11,9 +11,13 @@ use App\Http\Requests\ArticleRequest;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Services\ImageService;
 
 class ArticleController extends Controller
 {
+    public function __construct(private ImageService $imageService)
+    {}
+
     /**
      * Display a listing of the resource.
      */
@@ -72,12 +76,10 @@ class ArticleController extends Controller
     {
         $data = $request->validated();
 
-        $file = $request->file('img'); // img
-        $fileName = uniqid().'.'.$file->getClientOriginalExtension(); //jpg,jpeg
-        $file->storeAs('back', $fileName, 'public'); //public/back/12345678.jpg
+        $uploadImage = $this->imageService->uploadImage($data);
     
         $data['user_id']  = auth()->user()->id;
-        $data['img']  = $fileName;
+        $data['img']  = $uploadImage;
         $data['slug'] = Str::slug($data['title']);
          
         Article::create($data);
@@ -113,25 +115,20 @@ class ArticleController extends Controller
     {
         $data = $request->validated();
 
+        // Upload image hanya jika ada
         if ($request->hasFile('img')) {
-            $file = $request->file('img'); // img
-            $fileName = uniqid().'.'.$file->getClientOriginalExtension(); //jpg,jpeg
-            $file->storeAs('back', $fileName, 'public'); //public/back/12345678.jpg
-
-            //unlink img/delete old img
-            Storage::disk('public')->delete('back/'.$request->oldImg);
-            $data['img']  = $fileName;
-        } else {
-            $data['img']  = $request->oldImg;
+            $uploadImage = $this->imageService->uploadImage($data, $request->oldImg);
+            $data['img']  = $uploadImage;
         }
-        
+
         $data['user_id']  = auth()->user()->id;
         $data['slug'] = Str::slug($data['title']);
-         
+     
         Article::find($id)->update($data);
 
         return redirect(url('article'))->with('success', 'Data article has been update');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -139,11 +136,18 @@ class ArticleController extends Controller
     public function destroy(string $id)
     {
         $data = Article::find($id);
-        Storage::disk('public')->delete('back/'.$data->img);
+
+        // Hapus dua file: original dan thumbnail
+        Storage::disk('public')->delete([
+            'back/' . $data->img,
+            'back/thumbnail/' . $data->img
+        ]);
+
         $data->delete();
 
         return response()->json([
             'message' => 'Data article has been deleted'
         ]);
     }
+
 }

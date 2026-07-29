@@ -31,7 +31,8 @@
         <div class="card-header">Side Widget</div>
         <div class="card-body">
             <a href="https://domainesia.com" target="_blank" rel="noopener noreferrer"><img
-                    src="{{ $config['ads_widget'] }}" alt="ads_widget" class="img-fluid" width="70%"></a>
+                    src="{{ $config['ads_widget'] }}" alt="ads_widget" class="img-fluid d-block mx-auto" width="70%">
+            </a>
         </div>
     </div>
 
@@ -41,16 +42,18 @@
         <div class="card-body">
             @foreach ($popular_posts as $item)
                 <div class="card mb-3">
-                    <div class="row">
+                    <div class="row align-items-center">
                         <div class="col-md-3">
-                            <img src="{{ asset('storage/back/' . $item->img) }}" alt="{{ $item->title }}"
-                                class="img-fluid">
+                            <img src="{{ asset('storage/back/thumbnail/' . $item->img) }}" alt="{{ $item->title }}"
+                                class="img-fluid d-block ms-3">
                         </div>
 
                         <div class="col-md-9">
                             <div class="card-body">
                                 <p class="card-title">
-                                    <a href="{{ url('p/' . $item->slug) }}">{{ $item->title }}</a>
+                                    <a href="{{ url('p/' . $item->slug) }}" class="text-dark text-decoration-none">
+                                        {{ $item->title }}
+                                    </a>
                                 </p>
                             </div>
                         </div>

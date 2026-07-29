@@ -1,16 +1,16 @@
 @extends('front.layout.template')
 
 @push('meta-seo')
-<meta name="description" value="Article Category Blog lensamu, seputar opini kader IMM FEB">
-<meta name="keyword" value="list article lensa, article lensamu, artikel kategori lensamu.id">
-<meta property="og:title" content="Article Blog - RvinDev"/>
-<meta property="og:url" value="{{ url()->current() }}">
-<meta property="og:site_name" content="Blog RvinDev">
-<meta property="og:description" value="Article Category Blog lensamu, seputar opini kader IMM FTD">
-<meta property="og:image" value="http://127.0.0.1:8000/front/img/lensamu.png">
+    <meta name="description" value="Article Category Blog lensamu, seputar opini kader IMM FEB">
+    <meta name="keyword" value="list article lensa, article lensamu, artikel kategori lensamu.id">
+    <meta property="og:title" content="Article Blog - RvinDev" />
+    <meta property="og:url" value="{{ url()->current() }}">
+    <meta property="og:site_name" content="Blog RvinDev">
+    <meta property="og:description" value="Article Category Blog lensamu, seputar opini kader IMM FTD">
+    <meta property="og:image" value="http://127.0.0.1:8000/front/img/lensamu.png">
 @endpush
 
-@section('title', 'Article Blog - RvinDev')
+@section('title', 'Article Blog - lensamu.id')
 
 @section('content')
     <!-- Page content-->
@@ -43,7 +43,9 @@
                                 <a href="{{ url('category/' . $item->Category->slug) }}">{{ $item->Category->name }}</a>
                             </div>
                             <h2 class="card-title h4">{{ $item->title }}</h2>
-                            <p class="card-text">{{ Str::limit(strip_tags($item->desc), 200, '...') }}</p>
+                            <p class="card-text">
+                                {{ Str::limit(html_entity_decode(strip_tags($item->desc)), 100, '...') }}
+                            </p>
                             <a class="btn btn-primary" href="{{ url('p/' . $item->slug) }}">Read more →</a>
                         </div>
                     </div>

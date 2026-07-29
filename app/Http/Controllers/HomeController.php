@@ -22,12 +22,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-        return view('back.home.index', [
-            'latest_post' => Article::latest()->first(),
-            'articles' => Article::latest()->get(),
-            'categories' => Category::latest()->get(),
-        ]);
+    public function index(){
+    $total_articles = Article::count();
+    $total_categories = Category::count();
+    $latest_article = Article::latest()->take(5)->get();
+    $popular_article = Article::orderByDesc('views')->take(5)->get();
+
+    return view('Back.dashboard.index', compact(
+        'total_articles',
+        'total_categories',
+        'latest_article',
+        'popular_article'
+    ));
+
     }
+
 }

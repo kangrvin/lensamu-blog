@@ -1,16 +1,16 @@
 @extends('front.layout.template')
 
 @push('meta-seo')
-<meta name="description" value="Contact Blog lensamu, seputar opini kader IMM FEB">
-<meta name="keyword" value="contact lensa, kontak lensamu, contact lensamu.id">
-<meta property="og:title" content="Contact Blog - RvinDev">
-<meta property="og:url" value="{{ url()->current() }}">
-<meta property="og:site_name" content="Blog RvinDev">
-<meta property="og:description" value="Contact Blog lensamu, seputar opini kader IMM FTD">
-<meta property="og:image" value="http://127.0.0.1:8000/front/img/lensamu.png">
+    <meta name="description" value="Contact Blog lensamu, seputar opini kader IMM FEB">
+    <meta name="keyword" value="contact lensa, kontak lensamu, contact lensamu.id">
+    <meta property="og:title" content="Contact Blog - RvinDev">
+    <meta property="og:url" value="{{ url()->current() }}">
+    <meta property="og:site_name" content="Blog RvinDev">
+    <meta property="og:description" value="Contact Blog lensamu, seputar opini kader IMM FTD">
+    <meta property="og:image" value="http://127.0.0.1:8000/front/img/lensamu.png">
 @endpush
 
-@section('title', 'Contact Blog - RvinDev')
+@section('title', 'Contact Blog - lensamu.id')
 
 @section('content')
     <!-- Page content-->
@@ -42,6 +42,7 @@
                             <li><a href="https://youtube.com/{{ $config['youtube'] }}">Youtube</a></li>
                             <li><a href="https://facebook.com/{{ $config['facebook'] }}">Facebook</a></li>
                             <li><a href="https://instagram.com{{ $config['instagram'] }}">Instagram</a></li>
+                            <li><a href="https://tiktok.com/@{{ $config['tiktok'] }}">TikTok</a></li>
                         </ul>
                         </p>
                     </div>
